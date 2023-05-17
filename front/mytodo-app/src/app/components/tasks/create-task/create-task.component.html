@@ -1,0 +1,26 @@
+<div [formGroup]="taskForm">
+    <mat-form-field class="example-form-field">
+        <mat-label>Task description</mat-label>
+        <input matInput type="text" formControlName="description">
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Priority" formControlName="priority">
+        <mat-radio-button value=1>Very low</mat-radio-button>
+        <mat-radio-button value=2>Low</mat-radio-button>
+        <mat-radio-button value=3>Neutral</mat-radio-button>
+        <mat-radio-button value=4>High</mat-radio-button>
+        <mat-radio-button value=5>Critical</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field>
+        <mat-label>Due Date:</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate">
+        <mat-hint>MM-DD-YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div >
+        <button class="print" (click)="saveTask()">Confirm</button>
+    </div>
+</div>
