@@ -1,0 +1,70 @@
+.task-input {
+	display: block;
+	width: 45%;
+}
+
+.task-radio {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.due-date-input {
+	display: block;
+	width: 55%;
+	padding-left: 3%;
+}
+
+.task-line {
+	display: flex;
+	flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-inputs {
+	margin-right: 15px;
+}
+
+.task-submit {
+	display: block;
+	width: 100%;
+	max-width: 200px;
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+
+	background-color: #6554C0;
+	color: #FFF;
+	margin: 15px;
+
+	padding: 10px 15px;
+	font-size: 18px;
+	font-weight: 700;
+	border-radius: 10px;
+}
+
+.task-clear {
+	display: block;
+	width: 100%;
+	max-width: 200px;
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+
+	background-color: #FF5630;
+	color: #FFF;
+	margin: 15px;
+	padding: 10px 15px;
+	font-size: 18px;
+	font-weight: 700;
+	border-radius: 10px;
+}
+
+.button-row{
+	display: flex;
+	flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

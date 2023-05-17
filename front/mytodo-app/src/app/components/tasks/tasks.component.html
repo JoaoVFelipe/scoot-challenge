@@ -1,19 +1,89 @@
 <div class="tasks">
-	<app-create-task (onCreate)="getTasks()" #createTask></app-create-task>
 
-	<input 
-		type="text"
-		name="searchTask"
-		placeholder="Search for a task..."
-		class="task-input"
-		[(ngModel)]="taskSearch"
-		(keyup)="filterTasks()"
-	/>
+	<mat-expansion-panel #matExpansionPanel class="creat-drop">
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				<b class="new-task-title">
+					I need to remember this...
+				</b>
+			</mat-panel-title>
+		</mat-expansion-panel-header>
+		<app-create-task (onCreate)="getTasks()" #createTask></app-create-task>
+	</mat-expansion-panel>
 
-	<div *ngFor="let task of filteredTasks; let i = index;" class="task {{ (task.completed ? 'done' : '') }}">
-		<div class="id">{{ task.id }}</div>
-		<div class="content" (click)="toggleDone(task.id)">{{ task.description }}</div>
-		<button class="delete" (click)="deleteTask(task.id)">Remove</button>
-		<button class="edit" (click)="editTask(task.id)">Edit</button>
+	<div class="filter-line">
+		<div class="filter-input">
+			<input type="text" name="searchTask" placeholder="Search for a task..." class="task-input"
+				[(ngModel)]="taskSearch" (keyup)="filterTasks()" />
+		</div>
+
+		<div class="filter-checks">
+			<span class="filter-option">
+				<mat-checkbox  color="primary" class="example-margin" [(ngModel)]="filter.veryLow" (change)="filterTasks()">
+					Very low
+				</mat-checkbox>
+			</span>
+
+			<span class="filter-option">
+				<mat-checkbox color="primary" class="example-margin" [(ngModel)]="filter.low" (change)="filterTasks()">
+					Low
+				</mat-checkbox>
+			</span>
+
+			<span class="filter-option">
+				<mat-checkbox color="primary" class="example-margin" [(ngModel)]="filter.neutral" (change)="filterTasks()">
+					Neutral
+				</mat-checkbox>
+			</span>
+
+			<span class="filter-option">
+				<mat-checkbox color="primary" class="example-margin" [(ngModel)]="filter.high" (change)="filterTasks()">
+					High
+				</mat-checkbox>
+			</span>
+
+			<span>
+				<mat-checkbox color="primary" class="example-margin" [(ngModel)]="filter.critical" (change)="filterTasks()">
+					Critical
+				</mat-checkbox>
+			</span>
+		</div>
 	</div>
+
+	<mat-card>
+		<mat-card-header class="table-title"><b>My To-dos</b></mat-card-header>
+		<mat-card-content>
+			<div *ngFor="let task of filteredTasks; let i = index;" class="task {{ (task.completed ? 'done' : '') }}">
+				<button *ngIf="!task.completed" class="doneBtn" (click)="toggleDone(task.id)"><span
+						class="material-symbols-outlined">task_alt</span> </button>
+				<button *ngIf="task.completed" class="undoneBtn" (click)="toggleDone(task.id)"><span
+						class="material-symbols-outlined">unpublished</span> </button>
+
+				<div class="content">{{ task.description }}</div>
+
+				<div class="content due-date">
+					<span class="material-symbols-outlined">
+						event
+					</span>
+					<span class="due-date-text">
+						{{ task.dueDate | date }}
+					</span>
+				</div>
+
+				<div class="content">
+					<div [style.background]="getPriorityNameByNumber(task.priority).color" class="priority-badge">
+						{{ getPriorityNameByNumber(task.priority).name }}
+					</div>
+				</div>
+
+
+				<button class="edit btn" (click)="editTask(task.id); "><span
+						class="material-symbols-outlined">edit</span></button>
+				<button class="delete btn" (click)="deleteTask(task.id)"><span
+						class="material-symbols-outlined">delete_forever</span></button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+
+
 </div>

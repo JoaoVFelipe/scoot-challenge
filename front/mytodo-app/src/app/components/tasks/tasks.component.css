@@ -1,8 +1,13 @@
 .task {
 	display: flex;
-	padding: 10px 15px;
+	padding: 2px 15px;
 	background-color: #FFF;
 	border-bottom: 1px solid #DDD;
+	color: gray;
+}
+
+.content {
+	padding-top: 8px;
 }
 
 .task:nth-child(even) {
@@ -21,8 +26,14 @@
 	flex: 1 1 100%;
 }
 
-.task.done .content {
+.task .done .content {
 	text-decoration: line-through;
+}
+
+.filter-checks {
+	padding-top: 12px;
+	width: 45%;
+	margin-left: 5%;
 }
 
 .task-input {
@@ -31,26 +42,105 @@
 	padding: 10px 15px;
 	appearance: none;
 	border: none;
+	border-radius: 10px;
 	background-color: #F3F3F3;
 	margin-top: 15px;
-	font-size: 20px;
+	font-size: 15px;
 	outline: none;
 }
 
-.task-submit {
-	display: block;
+.filter-line {
+	display: flex;
+	margin-bottom: 25px;
+}
+
+.filter-priority {
+	margin-top: 2%;
+	margin-left: 5%;
+}
+
+.filter-option {
+	margin-right: 15px;
+}
+
+.filter-input {
+	width: 45%;
+}
+
+.priority-badge {
+	width: 40%;
+	text-align: center;
+	border: solid 1px lightgray;
+	border-radius: 20px;
+	color: white;
+}
+
+.due-date {
+	display: flex;
+	text-align: right;
 	width: 100%;
-	max-width: 200px;
-	appearance: none;
+}
+
+.due-date-text {
+	padding: 3px;
+	float: right;
+}
+
+.doneBtn {
+	background-color: transparent;
 	border: none;
-	outline: none;
-	background: none;
+	color: #333333;
+	padding-right: 15px;
+	font-size: 10px;
+	cursor: pointer;
+}
 
-	background-color: #FE4880;
-	color: #FFF;
-	margin: 15px auto;
+.undoneBtn {
+	background-color: transparent;
+	border: none;
+	color: #333333;
+	padding-right: 15px;
+	font-size: 10px;
+	cursor: pointer;
+}
 
-	padding: 10px 15px;
-	font-size: 18px;
-	font-weight: 700;
+.undoneBtn:hover {
+	color: crimson;
+}
+
+.doneBtn:hover {
+	color: lightgreen;
+}
+
+.btn {
+	background-color: transparent;
+	border: none;
+	color: #333333;
+	padding: 5px 5px;
+	font-size: 10px;
+	cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.delete:hover {
+	color: crimson;
+}
+
+.edit:hover {
+	color: lightblue;
+}
+
+.creat-drop {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.table-title {
+	margin-bottom: 15px;
+	color: #333333;
+}
+
+.new-task-title {
+	font-size: 20px;
+	color: #505050;
 }
