@@ -1,1 +1,1 @@
-{"tasks":[{"id":0,"description":"Feed the dog","priority":"2","dueDate":"05-20-2023","completed":false},{"id":1,"description":"tarefa braba para editar 2","priority":"3","dueDate":"05-19-2023"},{"id":2,"description":"nova task","priority":"3","dueDate":"05-25-2023","completed":false}]}
+{"tasks":[{"id":0,"description":"Feed the dog","priority":"1","dueDate":"05-19-2023","completed":false}]}

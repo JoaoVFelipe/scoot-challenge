@@ -27,7 +27,7 @@ const registerTask = async (req, res) => {
     const {description, priority, dueDate, completed} = req.body;
     try {
         let tasks = utilsGetTasks();
-        let newObj = { id: generateNewId(tasks), description, priority, dueDate: moment(dueDate).format('MM-DD-YYYY') || '', completed: completed || false }
+        let newObj = { id: generateNewId(tasks), description, priority, dueDate: moment(dueDate).format('MM-DD-yyyy') || '', completed: completed || false }
         tasks.push(newObj)
 
         let newData = JSON.stringify({tasks});
@@ -61,18 +61,21 @@ const updateTask = async (req, res) => {
 
     try {
         let tasks = utilsGetTasks();
-        if(objIndex) {
-            objIndex = tasks.findIndex((obj => obj.id == id));
-        
+        objIndex = tasks.findIndex((obj => obj.id == id));
+
+        if(objIndex != null) {        
             if(description) {
                 tasks[objIndex].description = description;
             }
+
             if(priority) {
                 tasks[objIndex].priority = priority;
             }
+
             if(dueDate) {
-                tasks[objIndex].dueDate = moment(dueDate).format('MM-DD-YYYY');
+                tasks[objIndex].dueDate = moment(dueDate).format('MM-DD-yyyy') || '';
             }
+
             if(completed !== null) {
                 tasks[objIndex].completed = completed;
             }
@@ -100,7 +103,7 @@ const deleteTask = async (req, res) => {
         let tasks = utilsGetTasks();
     
         objIndex = tasks.findIndex((obj => obj.id == id));
-        if (objIndex) {
+        if (objIndex != null ) {
             tasks.splice(objIndex, 1);
 
             let newData = JSON.stringify({tasks});
