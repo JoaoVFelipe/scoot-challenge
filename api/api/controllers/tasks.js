@@ -1,4 +1,5 @@
 require('dotenv').config()
+const moment = require('moment')
 const fs = require('fs');
 const ValidateExceptions = require('../exceptions/validate');
 
@@ -23,10 +24,10 @@ const generateNewId = (array) => {
 
 // Register tasks in database
 const registerTask = async (req, res) => {
-    const {description, priority} = req.body;
+    const {description, priority, dueDate} = req.body;
     try {
         let tasks = utilsGetTasks();
-        let newObj = { id: generateNewId(tasks), description, priority }
+        let newObj = { id: generateNewId(tasks), description, priority, dueDate: moment(dueDate).format('MM-DD-YYYY') || '' }
         tasks.push(newObj)
 
         let newData = JSON.stringify({tasks});
@@ -56,7 +57,7 @@ const getTasks = async (req, res) => {
 // Update a tasks
 const updateTask = async (req, res) => {
     const { id } = req.query;
-    const { description, priority } = req.body;
+    const { description, priority, dueDate } = req.body;
 
     try {
         let tasks = utilsGetTasks();
@@ -68,6 +69,9 @@ const updateTask = async (req, res) => {
             }
             if(priority) {
                 tasks[objIndex].priority = priority;
+            }
+            if(dueDate) {
+                tasks[objIndex].dueDate = moment(dueDate).format('MM-DD-YYYY');
             }
             
             let newData = JSON.stringify({tasks});

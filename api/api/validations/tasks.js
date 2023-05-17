@@ -16,6 +16,7 @@ const registerTask = async (req) => {
     const schema = Yup.object().shape({
         description: Yup.string().required('Task description is required').nullable().test('len', `Description must contain less than ${descriptionCaractersMax} caracters`, val => val.length <= descriptionCaractersMax),
         priority: Yup.number().nullable().required('Task priority is required!').min(1, "Priority must be atleast 1").max(5, "Allowed maximum priority is 5"),
+        dueDate: Yup.date().nullable().min(new Date(), "Task due date must be greater than the current date")
     });
 
     try {
@@ -36,6 +37,7 @@ const updateTask = async (req) => {
     const schema = Yup.object().shape({
         description: Yup.string().nullable().test('len', `Description must contain less than ${descriptionCaractersMax} caracters`, val => val.length <= descriptionCaractersMax),
         priority: Yup.number().nullable().min(1, "Priority must be atleast 1").max(5, "Allowed maximum priority is 5"),
+        dueDate: Yup.date().nullable().min(new Date(), "Task due date must be greater than the current date")
     });
 
     const querySchema = Yup.object().shape({
