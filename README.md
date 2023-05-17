@@ -1,5 +1,5 @@
 # Technical take-home - Scoot/Adecco
-Evaluation project for application in the selection process at Scoot
+Evaluation project for application in the selection process at Scoot.
 
 ## Details
 
