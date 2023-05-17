@@ -53,37 +53,49 @@
 	<mat-card>
 		<mat-card-header class="table-title"><b>My To-dos</b></mat-card-header>
 		<mat-card-content>
-			<div *ngFor="let task of filteredTasks; let i = index;" class="task">
-				<button *ngIf="!task.completed" class="doneBtn" (click)="toggleDone(task.id)"><span
-						class="material-symbols-outlined">task_alt</span> </button>
-				<button *ngIf="task.completed" class="undoneBtn" (click)="toggleDone(task.id)"><span
-						class="material-symbols-outlined">unpublished</span> </button>
-
-				<div class="content task-description" [ngClass]="task.completed ? 'done' : ''">
-					{{ task.description }}
-				</div>
-
-				<div class="content due-date">
-					<span class="material-symbols-outlined">
-						event
-					</span>
-					<span class="due-date-text">
-						{{ task.dueDate | date }}
-					</span>
-				</div>
-
-				<div class="content">
-					<div [style.background]="getPriorityNameByNumber(task.priority).color" class="priority-badge">
-						{{ getPriorityNameByNumber(task.priority).name }}
+			<div *ngIf="filteredTasks.length > 0;else empty_table">
+				<div *ngFor="let task of filteredTasks; let i = index;" class="task">
+					<button *ngIf="!task.completed" class="doneBtn" (click)="toggleDone(task.id)"><span
+							class="material-symbols-outlined">task_alt</span> </button>
+					<button *ngIf="task.completed" class="undoneBtn" (click)="toggleDone(task.id)"><span
+							class="material-symbols-outlined">unpublished</span> </button>
+	
+					<div class="content task-description" [ngClass]="task.completed ? 'done' : ''">
+						{{ task.description }}
 					</div>
+	
+					<div class="content due-date">
+						<span class="material-symbols-outlined">
+							event
+						</span>
+						<span class="due-date-text">
+							{{ task.dueDate | date }}
+						</span>
+					</div>
+	
+					<div class="content">
+						<div [style.background]="getPriorityNameByNumber(task.priority).color" class="priority-badge">
+							{{ getPriorityNameByNumber(task.priority).name }}
+						</div>
+					</div>
+	
+	
+					<button class="edit btn" (click)="editTask(task.id); "><span
+							class="material-symbols-outlined">edit</span></button>
+					<button class="delete btn" (click)="deleteTask(task.id)"><span
+							class="material-symbols-outlined">delete_forever</span></button>
 				</div>
-
-
-				<button class="edit btn" (click)="editTask(task.id); "><span
-						class="material-symbols-outlined">edit</span></button>
-				<button class="delete btn" (click)="deleteTask(task.id)"><span
-						class="material-symbols-outlined">delete_forever</span></button>
 			</div>
+			
+
+			<ng-template #empty_table>
+				<div class="empty-message">
+					<em>
+						Hey, looks like there's nothing left to do :) 
+					</em>
+				</div>
+			</ng-template>
+
 		</mat-card-content>
 	</mat-card>
 
