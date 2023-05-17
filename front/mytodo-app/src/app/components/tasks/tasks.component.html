@@ -53,13 +53,15 @@
 	<mat-card>
 		<mat-card-header class="table-title"><b>My To-dos</b></mat-card-header>
 		<mat-card-content>
-			<div *ngFor="let task of filteredTasks; let i = index;" class="task {{ (task.completed ? 'done' : '') }}">
+			<div *ngFor="let task of filteredTasks; let i = index;" class="task">
 				<button *ngIf="!task.completed" class="doneBtn" (click)="toggleDone(task.id)"><span
 						class="material-symbols-outlined">task_alt</span> </button>
 				<button *ngIf="task.completed" class="undoneBtn" (click)="toggleDone(task.id)"><span
 						class="material-symbols-outlined">unpublished</span> </button>
 
-				<div class="content">{{ task.description }}</div>
+				<div class="content task-description" [ngClass]="task.completed ? 'done' : ''">
+					{{ task.description }}
+				</div>
 
 				<div class="content due-date">
 					<span class="material-symbols-outlined">

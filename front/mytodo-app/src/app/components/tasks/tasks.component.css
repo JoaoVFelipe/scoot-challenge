@@ -26,8 +26,16 @@
 	flex: 1 1 100%;
 }
 
-.task .done .content {
+.task-description {
+	padding-top: 8px;
+}
+
+.task-description.done{
 	text-decoration: line-through;
+}
+
+.done-mark {
+	color: lightgreen;
 }
 
 .filter-checks {
