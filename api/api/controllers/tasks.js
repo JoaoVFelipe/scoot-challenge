@@ -24,10 +24,10 @@ const generateNewId = (array) => {
 
 // Register tasks in database
 const registerTask = async (req, res) => {
-    const {description, priority, dueDate} = req.body;
+    const {description, priority, dueDate, completed} = req.body;
     try {
         let tasks = utilsGetTasks();
-        let newObj = { id: generateNewId(tasks), description, priority, dueDate: moment(dueDate).format('MM-DD-YYYY') || '' }
+        let newObj = { id: generateNewId(tasks), description, priority, dueDate: moment(dueDate).format('MM-DD-YYYY') || '', completed: completed || false }
         tasks.push(newObj)
 
         let newData = JSON.stringify({tasks});
@@ -57,7 +57,7 @@ const getTasks = async (req, res) => {
 // Update a tasks
 const updateTask = async (req, res) => {
     const { id } = req.query;
-    const { description, priority, dueDate } = req.body;
+    const { description, priority, dueDate, completed } = req.body;
 
     try {
         let tasks = utilsGetTasks();
@@ -72,6 +72,9 @@ const updateTask = async (req, res) => {
             }
             if(dueDate) {
                 tasks[objIndex].dueDate = moment(dueDate).format('MM-DD-YYYY');
+            }
+            if(completed !== null) {
+                tasks[objIndex].completed = completed;
             }
             
             let newData = JSON.stringify({tasks});
