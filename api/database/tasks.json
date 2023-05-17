@@ -1,14 +1,1 @@
-{
-    "tasks": [
-        {
-            "id": 0,
-            "description": "Feed the dog",
-            "priority": "2"
-        },
-        {
-            "id": 1,
-            "description": "Water the plants",
-            "priority": "3"
-        }
-    ]
-}
+{"tasks":[{"id":0,"description":"Feed the dog","priority":2},{"id":1,"description":"Water the plants","priority":5}]}

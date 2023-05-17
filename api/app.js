@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use('/', taskRouter);
+app.use('/tasks', taskRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
