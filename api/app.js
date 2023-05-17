@@ -3,12 +3,16 @@ require('dotenv').config()
 const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
+const cors = require('cors')
 
 const taskRouter = require('./api/routes/tasks');
 
 const app = express();
 
 app.use(logger('dev'));
+app.use(cors({
+  origin: '*'
+}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
