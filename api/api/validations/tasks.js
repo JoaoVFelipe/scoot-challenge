@@ -16,7 +16,6 @@ const registerTask = async (req) => {
 
     const yesterdayDate = new Date();
     yesterdayDate.setDate(yesterdayDate.getDate() - 1)
-    console.log("date", yesterdayDate)
 
     // Basic data validations
     const schema = Yup.object().shape({
@@ -41,12 +40,15 @@ const updateTask = async (req) => {
     const errors = [];
     const { id } = req.query;
 
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1)
+
     // Basic data validations
     const schema = Yup.object().shape({
         description: Yup.string().nullable().test('len', `Description must contain less than ${descriptionCaractersMax} caracters`, val => val.length <= descriptionCaractersMax),
         priority: Yup.number().nullable().min(1, "Priority must be atleast 1").max(5, "Allowed maximum priority is 5"),
         dueDate: Yup.date().transform(value => {
-            return value ? moment(value).toDate() : value;}).nullable().min(new Date().setDate(new Date().getDate() - 1), "Task due date must be greater than the current date").nullable().min(new Date(), "Task due date must be greater than the current date"),
+            return value ? moment(value).toDate() : value;}).nullable().min(yesterdayDate, "Task due date must be greater than the current date"),
         completed: Yup.boolean().nullable()
     });
 
