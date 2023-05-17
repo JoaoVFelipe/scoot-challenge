@@ -11,13 +11,13 @@ It's necessary to run this application:
 ## Execution
 ### API:
 *  After cloning the repo, open the folder './api';
-*  Create a .env file and update it with your desired configuration, following the env.sample file - I recommend setting the port as 3001;
+*  Create a .env file and update it with your desired configuration, following the env.sample file - It's recommended to set the port as '3001';
 *  Run 'npm install' to install all necessary packages;
 *  Run 'npm start' to start the server in the configured port;
 
 ### Front:
-* At the application root, open the folder './front/mytodo-app';
-* Check the file in './src/app/service/tasks/task.service', and change the 'apiurl' following your server configuration;
+* Starting at the application root, open the folder './front/mytodo-app';
 * Run 'npm install' to install all necessary packages;
+* After installing, check the file at '.src/environment/environment.ts', and change the BASE_URL as per the address adhered by the Node server during backend initialization;
 * Run 'npm start' to start the application in the configured port;
 * Access it in the address informed at your console;
