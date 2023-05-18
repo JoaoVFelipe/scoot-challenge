@@ -4,15 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
-
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -41,7 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatExpansionModule,
     MatCheckboxModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

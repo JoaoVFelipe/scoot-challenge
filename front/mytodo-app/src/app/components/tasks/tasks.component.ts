@@ -4,6 +4,7 @@ import { TaskService } from 'src/app/service/tasks/task.service';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { MatExpansionPanel } from '@angular/material/expansion'
 import Swal from 'sweetalert2';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -18,6 +19,10 @@ export class TasksComponent implements OnInit {
   filteredTasks: Task[] = []
   taskSearch: string = "";
   createCollapse: boolean = false;
+
+  pageSize:number = 15;
+  currentPage: number = 0;
+  totalItems: number = 0;
 
   filter: any = {
     veryLow: false,
@@ -43,11 +48,21 @@ export class TasksComponent implements OnInit {
   }
 
   getTasks() {
-    this.service.getAllTasks().subscribe(task => {
-      this.tasks = task.tasks;
+    this.service.getAllTasks(this.pageSize, this.currentPage).subscribe(task => {
+      this.tasks = task.tasks || [];
+      this.totalItems = task.total || 0;
+      this.currentPage = task.page || 0;
+      this.pageSize = task.page_size || 15;
+
       this.filteredTasks = this.tasks;
       this.loading = false;
     })
+  }
+
+  public handlePage(e: PageEvent) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.getTasks();
   }
 
   filterTasks() {

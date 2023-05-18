@@ -21,8 +21,8 @@ export class TaskService {
     }));
   }
 
-  public getAllTasks(): Observable<any> {
-    return this.http.get(this.apiurl + '/tasks').pipe(catchError(error => {
+  public getAllTasks(pageSize: number, currentPage: number): Observable<any> {
+    return this.http.get(`${this.apiurl}/tasks?${pageSize ? `page_size=${pageSize}` : ''}${currentPage ? `&page_number=${currentPage}` : ''}`).pipe(catchError(error => {
       return throwError(error.message || error)
     }));
   }
