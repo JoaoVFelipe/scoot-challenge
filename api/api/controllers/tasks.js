@@ -5,6 +5,9 @@ const ValidateExceptions = require('../exceptions/validate');
 
 taskfile = './database/tasks.json';
 
+const DEFAULT_PAGE_SIZE = 15;
+
+
 const utilsGetTasks = () => {
     let actualData = fs.readFileSync(taskfile);
     let {tasks} = JSON.parse(actualData);
@@ -21,6 +24,17 @@ const generateNewId = (array) => {
     const lastId = array.length ? array[array.length - 1].id : 0;
     return Number(lastId + 1);
 }
+
+function paginate (arr, size) {
+    return arr.reduce((acc, val, i) => {
+      let idx = Math.floor(i / size)
+      let page = acc[idx] || (acc[idx] = [])
+      page.push(val)
+  
+      return acc
+    }, [])
+}
+  
 
 // Register tasks in database
 const registerTask = async (req, res) => {
@@ -43,10 +57,21 @@ const registerTask = async (req, res) => {
 
 // Get all tasks
 const getTasks = async (req, res) => {
+    let {page_number, page_size} = req.query;
+    let appliablePageNumber = page_number ? page_number : 0;
+    let appliablePageSize = page_size ? page_size : DEFAULT_PAGE_SIZE;
+
     try {
         fs.readFile(taskfile, (err, data) => {
             if (err) throw new ValidateExceptions(400, 'An error occurred while reading the JSON file.', [`Details: ${err}`]);
             let tasks = JSON.parse(data);
+            tasks.total = tasks.tasks.length;
+            const pagination = paginate(tasks.tasks, appliablePageSize);
+
+            tasks.tasks = pagination[appliablePageNumber];
+
+            tasks.page = appliablePageNumber;
+            tasks.page_size = appliablePageSize;
             return res.status(200).json(tasks);
         });
     } catch(err) {
