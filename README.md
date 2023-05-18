@@ -21,3 +21,8 @@ It's necessary to run this application:
 * After installing, check the file at '.src/environment/environment.ts', and change the BASE_URL as per the address adhered by the Node server during backend initialization;
 * Run 'npm start' to start the application in the configured port;
 * Access it in the address informed at your console;
+
+
+### Observations
+* A task object example can be fouund at '.api/database/tasks.json' - 
+* It follows the format: *{"id": id,"description": "Description of task", "priority":"1-5", "dueDate":"dd-MM-yyyy","completed":true|false}*
